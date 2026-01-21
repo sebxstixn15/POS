@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PA2_Lampl_Sebastian"
+        xmlns:RatingControl="clr-namespace:RatingControl;assembly=RatingControl" x:Class="PA2_Lampl_Sebastian.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <RatingControl:RatingControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1">
+            <Canvas>
+                <local:Slice X1="50" Y1="50" Radius="50" Angle="45" Stroke="Black"></local:Slice>
+                <local:Slice X1="150" Y1="50" Radius="50" Angle="45" Stroke="Black"></local:Slice>
+                <local:Spirale X1="300" Y1="50" Stroke="Red" StrokeThickness="2" Umdrehungen="4" Steigung="5" Ecken="5"></local:Spirale>
+                <local:Spirale X1="400" Y1="50" Stroke="Blue" StrokeThickness="2" Umdrehungen="6" Steigung="3" Ecken="4"></local:Spirale>
+            </Canvas>
+        </DockPanel>
+
+    </Grid>
+</Window>
