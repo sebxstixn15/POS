@@ -18,5 +18,6 @@
         <local:Stern X1="400" Y1="75" Zacken="5" RadiusAussen="40" RadiusInnen="15" Stroke="Gold" Fill="Yellow"/>
 
         <local:Parallelogramm X1="50" Y1="150" X2="150" Y2="200" Stroke="DarkGreen" Fill="LightGreen"/>
+        <local:Kreis_Radius X1="400" Y1="200" Radius="70" Stroke="Red" Fill="Red"></local:Kreis_Radius>
     </Canvas>
 </Window>
