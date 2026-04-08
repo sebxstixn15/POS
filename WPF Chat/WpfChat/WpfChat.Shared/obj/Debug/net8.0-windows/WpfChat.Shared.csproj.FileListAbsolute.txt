@@ -1,0 +1,12 @@
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.csproj.AssemblyReference.cache
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.AssemblyInfoInputs.cache
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.AssemblyInfo.cs
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.csproj.CoreCompileInputs.cache
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\bin\Debug\net8.0-windows\WpfChat.Shared.deps.json
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\bin\Debug\net8.0-windows\WpfChat.Shared.dll
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\bin\Debug\net8.0-windows\WpfChat.Shared.pdb
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.dll
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\refint\WpfChat.Shared.dll
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\WpfChat.Shared.pdb
+C:\Users\sebas\Documents\Claude\Projects\WPF Chat\WpfChat\WpfChat.Shared\obj\Debug\net8.0-windows\ref\WpfChat.Shared.dll

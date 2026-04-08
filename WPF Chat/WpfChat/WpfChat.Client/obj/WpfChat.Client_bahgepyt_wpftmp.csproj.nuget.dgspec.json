@@ -1,0 +1,156 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Client\\WpfChat.Client.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Client\\WpfChat.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Client\\WpfChat.Client.csproj",
+        "projectName": "WpfChat.Client",
+        "projectPath": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Client\\WpfChat.Client.csproj",
+        "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\WpfChat.Shared.csproj": {
+                "projectPath": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\WpfChat.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\WpfChat.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\WpfChat.Shared.csproj",
+        "projectName": "WpfChat.Shared",
+        "projectPath": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\WpfChat.Shared.csproj",
+        "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sebas\\Documents\\Claude\\Projects\\WPF Chat\\WpfChat\\WpfChat.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

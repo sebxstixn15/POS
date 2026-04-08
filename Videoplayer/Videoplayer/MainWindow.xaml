@@ -1,0 +1,67 @@
+﻿<Window x:Class="Videoplayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pro Video Player" Height="500" Width="900" Background="#181818">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <DataTemplate x:Key="VideoItemTemplate">
+            <Border BorderBrush="#444" BorderThickness="0,0,0,1" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🎬" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Title}" Foreground="Black" FontSize="12"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="PlayerBtnStyle" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Background" Value="#333"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    
+    
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#252525">
+            <Button Content="Datei hinzufügen" Click="BtnAddFile_Click" Margin="5"/>
+            <Button Content="Ordner hinzufügen" Click="BtnAddFolder_Click" Margin="5"/>
+            <ToggleButton x:Name="ToggleSidebar" Content="Playlist AN/AUS" IsChecked="True" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom" Background="#252525">
+            <Slider x:Name="TimelineSlider" Margin="0,5" Thumb.DragStarted="Timeline_DragStarted" Thumb.DragCompleted="Timeline_DragCompleted"/>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="▶" Click="BtnPlay_Click" Style="{StaticResource PlayerBtnStyle}"/>
+                    <Button Content="⏸" Click="BtnPause_Click" Style="{StaticResource PlayerBtnStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="🔈" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="VolumeSlider" Width="100" Minimum="0" Maximum="1" Value="0.5" Margin="5,0"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <Grid DockPanel.Dock="Right" Width="250" 
+              Visibility="{Binding ElementName=ToggleSidebar, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Playlist" Foreground="White">
+                <ListBox x:Name="lbPlaylist" MouseDoubleClick="lb_DoubleClick" ItemTemplate="{StaticResource VideoItemTemplate}"/>
+            </GroupBox>
+            <GroupBox Header="Verlauf" Grid.Row="1" Foreground="White">
+                <ListBox x:Name="lbHistory" MouseDoubleClick="lb_DoubleClick" ItemTemplate="{StaticResource VideoItemTemplate}"/>
+            </GroupBox>
+        </Grid>
+
+        <MediaElement x:Name="MainPlayer" 
+                      LoadedBehavior="Manual" 
+                      Volume="{Binding ElementName=VolumeSlider, Path=Value}"
+                      MediaEnded="MainPlayer_MediaEnded"/>
+    </DockPanel>
+</Window>

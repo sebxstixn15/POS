@@ -1,0 +1,327 @@
+<fluent:RibbonWindow x:Class="WPF_WordPad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fluent="urn:fluent-ribbon"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="WPF WordPad"
+        Height="700" Width="1100"
+        MinHeight="500" MinWidth="800"
+        Style="{StaticResource MainWindowStyle}"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New"    Executed="New_Executed" />
+        <CommandBinding Command="ApplicationCommands.Open"   Executed="Open_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save"   Executed="Save_Executed" />
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs_Executed" />
+        <CommandBinding Command="ApplicationCommands.Print"  Executed="Print_Executed" />
+        <CommandBinding Command="ApplicationCommands.Close"  Executed="Close_Executed" />
+    </Window.CommandBindings>
+
+    <DockPanel>
+
+        <!-- ═══════════════════ RIBBON ═══════════════════ -->
+        <fluent:Ribbon DockPanel.Dock="Top" AutomaticStateManagement="True">
+
+            <!-- APP MENU -->
+            <fluent:Ribbon.Menu>
+                <fluent:ApplicationMenu KeyTip="F">
+                    <fluent:MenuItem Header="Neu"     Command="ApplicationCommands.New"    KeyTip="N" />
+                    <fluent:MenuItem Header="Öffnen..." Command="ApplicationCommands.Open"  KeyTip="O" />
+                    <fluent:MenuItem Header="Speichern" Command="ApplicationCommands.Save"  KeyTip="S" />
+                    <fluent:MenuItem Header="Speichern unter..." Command="ApplicationCommands.SaveAs" KeyTip="A" />
+                    <fluent:MenuItem Header="Drucken..." Command="ApplicationCommands.Print" KeyTip="D" />
+                    <Separator />
+                    <fluent:MenuItem x:Name="RecentFilesMenu" Header="Zuletzt geöffnet" />
+                    <Separator />
+                    <fluent:MenuItem Header="Beenden" Command="ApplicationCommands.Close"  KeyTip="X" />
+                </fluent:ApplicationMenu>
+            </fluent:Ribbon.Menu>
+
+            <!-- TAB: START -->
+            <fluent:RibbonTabItem Header="Start" KeyTip="H">
+
+                <fluent:RibbonGroupBox Header="Datei">
+                    <fluent:Button x:Name="BtnNew"
+                                   Header="Neu"
+                                   Command="ApplicationCommands.New"
+                                   KeyTip="N" />
+                    <fluent:Button x:Name="BtnOpen"
+                                   Header="Öffnen"
+                                   Command="ApplicationCommands.Open"
+                                   KeyTip="O" />
+                    <fluent:Button x:Name="BtnSave"
+                                   Header="Speichern"
+                                   Command="ApplicationCommands.Save"
+                                   KeyTip="S" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Zwischenablage">
+                    <fluent:Button Header="Einfügen"
+                                   Command="ApplicationCommands.Paste"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="V" />
+                    <fluent:Button Header="Ausschneiden"
+                                   Command="ApplicationCommands.Cut"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="X" />
+                    <fluent:Button Header="Kopieren"
+                                   Command="ApplicationCommands.Copy"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="C" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Bearbeiten">
+                    <fluent:Button x:Name="BtnUndo"
+                                   Header="Rückgängig"
+                                   Command="ApplicationCommands.Undo"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="Z" />
+                    <fluent:Button x:Name="BtnRedo"
+                                   Header="Wiederholen"
+                                   Command="ApplicationCommands.Redo"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="Y" />
+                    <fluent:Button Header="Alles wählen"
+                                   Command="ApplicationCommands.SelectAll"
+                                   CommandTarget="{Binding ElementName=richTextBox1}"
+                                   KeyTip="A" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Suchen">
+                    <fluent:Button Header="Suchen..."
+                                   KeyTip="F"
+                                   Click="BtnFind_Click" />
+                    <fluent:Button Header="Ersetzen..."
+                                   KeyTip="H"
+                                   Click="BtnReplace_Click" />
+                </fluent:RibbonGroupBox>
+
+            </fluent:RibbonTabItem>
+
+            <!-- TAB: FORMAT -->
+            <fluent:RibbonTabItem Header="Format" KeyTip="O">
+
+                <fluent:RibbonGroupBox Header="Schriftart">
+                    <StackPanel Orientation="Vertical" Margin="2,0">
+                        <TextBlock Text="Schriftart" FontSize="10" Margin="2,0,0,1"/>
+                        <ComboBox x:Name="FontFamilyCombo"
+                                  Width="160"
+                                  Style="{StaticResource RibbonComboStyle}"
+                                  SelectionChanged="FontFamilyCombo_SelectionChanged"
+                                  IsEditable="True" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="4,0">
+                        <TextBlock Text="Größe" FontSize="10" Margin="2,0,0,1"/>
+                        <xctk:IntegerUpDown x:Name="FontSizeUpDown"
+                                            Width="58"
+                                            Minimum="6"
+                                            Maximum="144"
+                                            Value="14"
+                                            Increment="1"
+                                            ValueChanged="FontSizeUpDown_ValueChanged" />
+                    </StackPanel>
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Formatierung">
+                    <fluent:ToggleButton x:Name="BtnBold"
+                                         Header="Fett"
+                                         Command="EditingCommands.ToggleBold"
+                                         CommandTarget="{Binding ElementName=richTextBox1}"
+                                         KeyTip="B"
+                                         Click="FormatButton_Click" />
+                    <fluent:ToggleButton x:Name="BtnItalic"
+                                         Header="Kursiv"
+                                         Command="EditingCommands.ToggleItalic"
+                                         CommandTarget="{Binding ElementName=richTextBox1}"
+                                         KeyTip="I"
+                                         Click="FormatButton_Click" />
+                    <fluent:ToggleButton x:Name="BtnUnderline"
+                                         Header="Unterstrichen"
+                                         Command="EditingCommands.ToggleUnderline"
+                                         CommandTarget="{Binding ElementName=richTextBox1}"
+                                         KeyTip="U"
+                                         Click="FormatButton_Click" />
+                    <fluent:ToggleButton x:Name="BtnStrike"
+                                         Header="Durchgestrichen"
+                                         Click="BtnStrike_Click" />
+                    <fluent:ToggleButton x:Name="BtnSubscript"
+                                         Header="Tiefgestellt"
+                                         Command="EditingCommands.ToggleSubscript"
+                                         CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:ToggleButton x:Name="BtnSuperscript"
+                                         Header="Hochgestellt"
+                                         Command="EditingCommands.ToggleSuperscript"
+                                         CommandTarget="{Binding ElementName=richTextBox1}" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Farbe">
+                    <StackPanel Orientation="Vertical" Margin="2,2">
+                        <TextBlock Text="Schriftfarbe" FontSize="10" Margin="2,0,0,2"/>
+                        <xctk:ColorPicker x:Name="ForeColorPicker"
+                                          Width="100"
+                                          SelectedColor="Black"
+                                          SelectedColorChanged="ForeColorPicker_Changed" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="4,2">
+                        <TextBlock Text="Hintergrund" FontSize="10" Margin="2,0,0,2"/>
+                        <xctk:ColorPicker x:Name="BackColorPicker"
+                                          Width="100"
+                                          SelectedColor="White"
+                                          SelectedColorChanged="BackColorPicker_Changed" />
+                    </StackPanel>
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Ausrichtung">
+                    <fluent:RadioButton Header="Links"
+                                        GroupName="Align"
+                                        Command="EditingCommands.AlignLeft"
+                                        CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:RadioButton Header="Zentriert"
+                                        GroupName="Align"
+                                        Command="EditingCommands.AlignCenter"
+                                        CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:RadioButton Header="Rechts"
+                                        GroupName="Align"
+                                        Command="EditingCommands.AlignRight"
+                                        CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:RadioButton Header="Blocksatz"
+                                        GroupName="Align"
+                                        Command="EditingCommands.AlignJustify"
+                                        CommandTarget="{Binding ElementName=richTextBox1}" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Listen">
+                    <fluent:ToggleButton Header="Aufzählungsliste"
+                                         Command="EditingCommands.ToggleBullets"
+                                         CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:ToggleButton Header="Nummerierte Liste"
+                                         Command="EditingCommands.ToggleNumbering"
+                                         CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:Button Header="Einzug +"
+                                   Command="EditingCommands.IncreaseIndentation"
+                                   CommandTarget="{Binding ElementName=richTextBox1}" />
+                    <fluent:Button Header="Einzug -"
+                                   Command="EditingCommands.DecreaseIndentation"
+                                   CommandTarget="{Binding ElementName=richTextBox1}" />
+                </fluent:RibbonGroupBox>
+
+            </fluent:RibbonTabItem>
+
+            <!-- TAB: EINFÜGEN -->
+            <fluent:RibbonTabItem Header="Einfügen" KeyTip="N">
+                <fluent:RibbonGroupBox Header="Bild">
+                    <fluent:Button Header="Bild einfügen"
+                                   Click="InsertImage_Click"
+                                   KeyTip="B" />
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Datum &amp; Zeit">
+                    <fluent:Button Header="Datum/Zeit"
+                                   Click="InsertDateTime_Click"
+                                   KeyTip="D" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <!-- TAB: ANSICHT -->
+            <fluent:RibbonTabItem Header="Ansicht" KeyTip="A">
+                <fluent:RibbonGroupBox Header="Zoom">
+                    <fluent:Button Header="Zoom +"  Click="ZoomIn_Click" />
+                    <fluent:Button Header="Zoom -"  Click="ZoomOut_Click" />
+                    <fluent:Button Header="100 %"   Click="ZoomReset_Click" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="Ansicht">
+                    <fluent:CheckBox x:Name="ChkStatusBar"
+                                     Header="Statusleiste"
+                                     IsChecked="True"
+                                     Checked="ChkStatusBar_Changed"
+                                     Unchecked="ChkStatusBar_Changed" />
+                    <fluent:CheckBox x:Name="ChkWordWrap"
+                                     Header="Zeilenumbruch"
+                                     IsChecked="True"
+                                     Checked="ChkWordWrap_Changed"
+                                     Unchecked="ChkWordWrap_Changed" />
+                    <fluent:CheckBox x:Name="ChkSpellCheck"
+                                     Header="Rechtschreibprüfung"
+                                     IsChecked="True"
+                                     Checked="ChkSpellCheck_Changed"
+                                     Unchecked="ChkSpellCheck_Changed" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+        </fluent:Ribbon>
+
+        <!-- STATUS BAR -->
+        <StatusBar x:Name="statusBar" DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusFileName" Text="Neue Datei" />
+            </StatusBarItem>
+            <Separator Style="{StaticResource StatusSeparatorStyle}" />
+            <StatusBarItem>
+                <TextBlock x:Name="StatusWords" Text="Wörter: 0" />
+            </StatusBarItem>
+            <Separator Style="{StaticResource StatusSeparatorStyle}" />
+            <StatusBarItem>
+                <TextBlock x:Name="StatusChars" Text="Zeichen: 0" />
+            </StatusBarItem>
+            <Separator Style="{StaticResource StatusSeparatorStyle}" />
+            <StatusBarItem>
+                <TextBlock x:Name="StatusZoom" Text="Zoom: 100 %" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="StatusModified" Text="" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- FIND / REPLACE PANEL -->
+        <Border x:Name="FindPanel"
+                DockPanel.Dock="Bottom"
+                Background="#EAF4FB"
+                BorderBrush="{StaticResource AccentBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="8,6"
+                Visibility="Collapsed">
+            <WrapPanel>
+                <Label Content="Suchen:" VerticalAlignment="Center" />
+                <TextBox x:Name="FindTextBox"
+                         Width="160" Height="24" Margin="4,0"
+                         VerticalAlignment="Center"
+                         KeyDown="FindTextBox_KeyDown" />
+                <Button Content="Weiter"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Margin="4,0"
+                        Click="FindNext_Click" />
+                <Button Content="Zurück"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Margin="4,0"
+                        Click="FindPrev_Click" />
+                <Separator Width="12" Background="Transparent" />
+                <Label Content="Ersetzen durch:" VerticalAlignment="Center" />
+                <TextBox x:Name="ReplaceTextBox"
+                         Width="160" Height="24" Margin="4,0"
+                         VerticalAlignment="Center" />
+                <Button Content="Ersetzen"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Margin="4,0"
+                        Click="Replace_Click" />
+                <Button Content="Alle ersetzen"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Margin="4,0"
+                        Click="ReplaceAll_Click" />
+                <Button Content="✕"
+                        Margin="8,0,0,0"
+                        Padding="8,4"
+                        Click="CloseFind_Click" />
+            </WrapPanel>
+        </Border>
+
+        <!-- RICHTEXTBOX -->
+        <RichTextBox x:Name="richTextBox1"
+                     Style="{StaticResource EditorStyle}"
+                     SelectionChanged="RichTextBox_SelectionChanged"
+                     TextChanged="RichTextBox_TextChanged"
+                     PreviewKeyDown="RichTextBox_PreviewKeyDown" />
+
+    </DockPanel>
+</fluent:RibbonWindow>
