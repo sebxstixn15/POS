@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,10 +17,13 @@ namespace Roboter
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex regex = new Regex(@"REPEAT|MOVE|COLLECT|LEFT|RIGHT|UP|DOWN|\d+|{|}|\S+");
-        private Regex numberRegex = new Regex(@"\d+");
-        private Regex keywordRegex = new Regex(@"REPEAT|MOVE|COLLECT");
-        private Regex directionRegex = new Regex(@"LEFT|RIGHT|UP|DOWN");
+        private Regex regex = new Regex(@"REPEAT|MOVE|COLLECT|LEFT|RIGHT|UP|DOWN|VAR|IF|ELSE|WHILE|DEF|CALL|==|!=|<=|>=|[+\-*/=><]|\d+|{|}|\w+");
+        private Regex stringRegex = new Regex(@"^[a-zA-Z_]\w*$");
+        private Regex numberRegex = new Regex(@"^\d+$");
+        private Regex keywordRegex = new Regex(@"^(REPEAT|MOVE|COLLECT|VAR|IF|ELSE|WHILE|DEF|CALL)$");
+        private Regex directionRegex = new Regex(@"^(LEFT|RIGHT|UP|DOWN)$");
+        private Regex operatorRegex = new Regex(@"^[+\-*/=]$");
+        private Regex comparatorRegex = new Regex(@"^(==|!=|<=|>=|<|>)$");
 
         private List<Token> tokens = new List<Token>();
 
@@ -30,7 +33,7 @@ namespace Roboter
 
             Field.LoadField("Aufgabe1.xml");
 
-            Code.Text = "REPEAT 2 {\r\n    MOVE RIGHT\r\n}\r\nREPEAT 6 {\r\n    MOVE DOWN\r\n}\r\nREPEAT 2 {\r\n    MOVE LEFT\r\n}\r\nCOLLECT\r\nREPEAT 4 {\r\n    MOVE RIGHT\r\n}\r\nMOVE DOWN\r\nCOLLECT\r\nMOVE RIGHT\r\nREPEAT 4 {\r\n    MOVE UP\r\n}\r\nMOVE LEFT\r\nCOLLECT";
+            Code.Text = "VAR test = 1\r\nIF test == 1 {\r\n    MOVE RIGHT\r\n} ELSE {\r\n    MOVE LEFT\r\n}\r\nREPEAT 2 {\r\n    MOVE RIGHT\r\n}\r\nREPEAT 6 {\r\n    MOVE DOWN\r\n}\r\nREPEAT 2 {\r\n    MOVE LEFT\r\n}\r\nCOLLECT\r\nREPEAT 4 {\r\n    MOVE RIGHT\r\n}\r\nMOVE DOWN\r\nCOLLECT\r\nMOVE RIGHT\r\nREPEAT 4 {\r\n    MOVE UP\r\n}\r\nMOVE LEFT\r\nCOLLECT";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,6 +56,18 @@ namespace Roboter
 
                     case var _ when directionRegex.IsMatch(match.Value):
                         token.Type = Token.TokenType.Direction;
+                        break;
+
+                    case var _ when operatorRegex.IsMatch(match.Value):
+                        token.Type = Token.TokenType.Operator;
+                        break;
+                        
+                    case var _ when comparatorRegex.IsMatch(match.Value):
+                        token.Type = Token.TokenType.Comparator;
+                        break;
+
+                    case var _ when stringRegex.IsMatch(match.Value):
+                        token.Type = Token.TokenType.Identifier; 
                         break;
 
                     case "{":

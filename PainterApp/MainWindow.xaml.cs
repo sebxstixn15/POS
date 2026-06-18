@@ -1,4 +1,4 @@
-﻿using Painter;
+using Painter;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -18,20 +18,19 @@ namespace PainterApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex regex = new Regex(@"COLOR|FOR|DRAW|TURN|\d+|{|}|\S+");
-        private Regex stringRegex = new Regex(@"\w+");
-        private Regex numberRegex = new Regex(@"\d+");
-        private Regex keywordRegex = new Regex(@"COLOR|FOR|DRAW|TURN");
+        private Regex regex = new Regex(@"COLOR|FOR|DRAW|TURN|VAR|IF|ELSE|WHILE|DEF|CALL|==|!=|<=|>=|[+\-*/=><]|\d+|{|}|\w+");
+        private Regex stringRegex = new Regex(@"^[a-zA-Z_]\w*$");
+        private Regex numberRegex = new Regex(@"^\d+$");
+        private Regex keywordRegex = new Regex(@"^(COLOR|FOR|DRAW|TURN|VAR|IF|ELSE|WHILE|DEF|CALL)$");
+        private Regex operatorRegex = new Regex(@"^[+\-*/=]$");
+        private Regex comparatorRegex = new Regex(@"^(==|!=|<=|>=|<|>)$");
 
         private List<Token> tokens = new List<Token>();
 
         public MainWindow()
         {
             InitializeComponent();
-
-           
             PainterCanvas.Clear();
-
             Code.Text = "";
         }
 
@@ -46,8 +45,6 @@ namespace PainterApp
                 tokens.Add(token);
                 switch (match.Value)
                 {
-                    
-
                     case var _ when numberRegex.IsMatch(match.Value):
                         token.Type = Token.TokenType.Number;
                         break;
@@ -55,9 +52,18 @@ namespace PainterApp
                     case var _ when keywordRegex.IsMatch(match.Value):
                         token.Type = Token.TokenType.Keyword;
                         break;
+                        
+                    case var _ when operatorRegex.IsMatch(match.Value):
+                        token.Type = Token.TokenType.Operator;
+                        break;
+                        
+                    case var _ when comparatorRegex.IsMatch(match.Value):
+                        token.Type = Token.TokenType.Comparator;
+                        break;
 
                     case var _ when stringRegex.IsMatch(match.Value):
-                        token.Type = Token.TokenType.String;
+                        // We treat words that aren't keywords as Identifiers/Strings
+                        token.Type = Token.TokenType.Identifier; 
                         break;
 
                     case "{":

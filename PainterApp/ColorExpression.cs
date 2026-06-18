@@ -1,4 +1,4 @@
-﻿using Painter;
+using Painter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +16,7 @@ namespace PainterApp
         {
             if (tokens.Count > 0)
             {
-                if (tokens[0].Type == Token.TokenType.String)
+                if (tokens[0].Type == Token.TokenType.Identifier)
                 {
                     _color = tokens[0].Value;
                     tokens.RemoveAt(0);

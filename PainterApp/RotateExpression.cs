@@ -1,71 +1,47 @@
-﻿using Painter;
-using System;
+using Painter;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PainterApp
 {
     internal class RotateExpression : Expression
     {
-        private int _angle;
+        private List<Token> _mathTokens = new();
         private string _direction;
+
         internal override void Parse(List<Token> tokens)
         {
-            if (tokens.Count > 0)
+            if (tokens.Count > 0 && tokens[0].Type == Token.TokenType.Identifier)
             {
-                if (tokens[0].Type == Token.TokenType.String)
+                _direction = tokens[0].Value;
+                tokens.RemoveAt(0);
+                
+                _mathTokens = MathEvaluator.GatherMathTokens(tokens);
+                if (_mathTokens.Count == 0)
                 {
-                    _direction = tokens[0].Value;
-                    tokens.RemoveAt(0);
-
-                }
-                else
-                {
-                    //Fehler
-                    Errors.Add("Unexpected Token Type " + tokens[0].Type + ", expected String");
-                }
-                if (tokens.Count > 0)
-                {
-                    if (tokens[0].Type == Token.TokenType.Number)
-                    {
-                        _angle = int.Parse(tokens[0].Value);
-                        tokens.RemoveAt(0);
-                    }
-                    else
-                    {
-                        //Fehler
-                        Errors.Add("Unexpected Token Type " + tokens[0].Type + ", expected Number");
-                    }
-                }
-                else
-                {
-                    //Fehler
-                    Errors.Add("Unexpected end of RotateExpression, expected Number");
+                    Errors.Add("Unexpected end of RotateExpression, expected Expression");
                 }
             }
             else
             {
-                //Fehler
-                Errors.Add("Unexpected end of RotateExpression, expected Number");
+                Errors.Add("Unexpected Token Type, expected Direction (Identifier)");
             }
         }
 
         internal override void Run(PainterControl painter)
         {
+            var tempTokens = new List<Token>(_mathTokens);
+            double angle = MathEvaluator.EvaluateMath(tempTokens);
+
             painter.Dispatcher.Invoke(() =>
             {
                 if (_direction == "LEFT")
                 {
-                    painter.Rotate(-_angle);
-                } else if (_direction == "RIGHT")
-                {
-
-                    painter.Rotate(_angle);
+                    painter.Rotate(-(int)angle);
                 }
-
+                else if (_direction == "RIGHT")
+                {
+                    painter.Rotate((int)angle);
+                }
             });
         }
     }

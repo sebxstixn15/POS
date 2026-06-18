@@ -1,4 +1,4 @@
-﻿using AbcRobotCore;
+using AbcRobotCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +21,14 @@ namespace Roboter
                     Expression expression = null;
                     switch (token.Value)
                     {
-                        case "MOVE":
-                            expression = new MoveExpression();
-                            break;
-
-                        case "REPEAT":
-                            expression = new RepeatExpression();
-                            break;
-
-                        case "COLLECT":
-                            expression = new CollectExpression();
-                            break;
+                        case "MOVE": expression = new MoveExpression(); break;
+                        case "REPEAT": expression = new RepeatExpression(); break;
+                        case "COLLECT": expression = new CollectExpression(); break;
+                        case "VAR": expression = new VarExpression(); break;
+                        case "IF": expression = new IfExpression(); break;
+                        case "WHILE": expression = new WhileExpression(); break;
+                        case "DEF": expression = new DefExpression(); break;
+                        case "CALL": expression = new CallExpression(); break;
                     }
                     if(expression == null)
                     {

@@ -1,4 +1,4 @@
-﻿using Painter;
+using Painter;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -22,20 +22,15 @@ namespace PainterApp
                     Expression expression = null;
                     switch (token.Value)
                     {
-                        case "DRAW":
-                            expression = new PaintExpression();
-                            break;
-
-                        case "FOR":
-                            expression = new ForExpression();
-                            break;
-                        case "TURN":
-                            expression = new RotateExpression();
-                            break;
-                        case "COLOR":
-                            expression = new ColorExpression();
-                            break;
-
+                        case "DRAW": expression = new PaintExpression(); break;
+                        case "FOR": expression = new ForExpression(); break;
+                        case "TURN": expression = new RotateExpression(); break;
+                        case "COLOR": expression = new ColorExpression(); break;
+                        case "VAR": expression = new VarExpression(); break;
+                        case "IF": expression = new IfExpression(); break;
+                        case "WHILE": expression = new WhileExpression(); break;
+                        case "DEF": expression = new DefExpression(); break;
+                        case "CALL": expression = new CallExpression(); break;
                     }
                     if (expression == null)
                     {
