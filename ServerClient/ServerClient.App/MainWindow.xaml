@@ -1,0 +1,153 @@
+<Window x:Class="ServerClient.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Server-Client Anwendung" Height="650" Width="850"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- ═══════════════════════════════════════════════════════
+             PANEL 1: Startbildschirm – Auswahl Server oder Client
+             ═══════════════════════════════════════════════════════ -->
+        <Grid x:Name="PnlStart">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="🖧 Server-Client Anwendung"
+                           FontSize="24" FontWeight="Bold"
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Wähle den Modus:"
+                           FontSize="14" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                <ComboBox x:Name="CmbMode" Width="250" FontSize="14"
+                          Padding="8,6" Margin="0,0,0,15"
+                          SelectedIndex="0">
+                    <ComboBoxItem Content="🖥️ Als Server starten"/>
+                    <ComboBoxItem Content="💻 Als Client starten"/>
+                </ComboBox>
+
+                <Button x:Name="BtnStartMode" Content="▶ Starten"
+                        FontSize="16" FontWeight="Bold"
+                        Padding="20,10" HorizontalAlignment="Center"
+                        Click="BtnStartMode_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ═══════════════════════════════════════════════════════
+             PANEL 2: Server-Ansicht
+             ═══════════════════════════════════════════════════════ -->
+        <DockPanel x:Name="PnlServer" Margin="8" Visibility="Collapsed">
+            <!-- Toolbar -->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                <Label Content="🖥️ SERVER" FontWeight="Bold" FontSize="16" Foreground="DarkBlue"/>
+                <Separator Margin="8,0"/>
+                <Label Content="Port:"/>
+                <TextBox x:Name="TxtServerPort" Text="5000" Width="70"/>
+                <Button x:Name="BtnServerStart" Content="▶ Starten" Click="BtnServerStart_Click"/>
+                <Button x:Name="BtnServerStop" Content="⏹ Stoppen" Click="BtnServerStop_Click" IsEnabled="False"/>
+                <Separator Margin="8,0"/>
+                <Label x:Name="LblServerStatus" Content="Gestoppt" Foreground="Red" FontWeight="Bold"/>
+            </StackPanel>
+
+            <!-- Status-Bar -->
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="TxtServerStats" Text="Verbundene Clients: 0"/>
+                </StatusBarItem>
+            </StatusBar>
+
+            <!-- Inhalt: Log + empfangene Nachrichten -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Server-Log -->
+                <GroupBox Grid.Row="0" Header="📋 Server-Protokoll">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="LstServerLog" Grid.Row="0"
+                                 FontFamily="Consolas" FontSize="12"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        <Button Grid.Row="1" Content="Log leeren"
+                                HorizontalAlignment="Right" Margin="0,4,0,0"
+                                Click="BtnClearServerLog_Click"/>
+                    </Grid>
+                </GroupBox>
+
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"
+                              Background="LightGray" ResizeDirection="Rows"/>
+
+                <!-- Empfangene Nachrichten -->
+                <GroupBox Grid.Row="2" Header="📨 Empfangene Nachrichten">
+                    <ListBox x:Name="LstServerMessages"
+                             FontFamily="Consolas" FontSize="12"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </GroupBox>
+            </Grid>
+        </DockPanel>
+
+        <!-- ═══════════════════════════════════════════════════════
+             PANEL 3: Client-Ansicht
+             ═══════════════════════════════════════════════════════ -->
+        <DockPanel x:Name="PnlClient" Margin="8" Visibility="Collapsed">
+            <!-- Toolbar -->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                <Label Content="💻 CLIENT" FontWeight="Bold" FontSize="16" Foreground="DarkGreen"/>
+                <Separator Margin="8,0"/>
+                <Label Content="Host:"/>
+                <TextBox x:Name="TxtClientHost" Text="127.0.0.1" Width="110"/>
+                <Label Content="Port:"/>
+                <TextBox x:Name="TxtClientPort" Text="5000" Width="60"/>
+                <Label Content="Name:"/>
+                <TextBox x:Name="TxtClientName" Text="" Width="100"/>
+                <Button x:Name="BtnClientConnect" Content="🔗 Verbinden" Click="BtnClientConnect_Click"/>
+                <Button x:Name="BtnClientDisconnect" Content="✂ Trennen" Click="BtnClientDisconnect_Click" IsEnabled="False"/>
+                <Separator Margin="8,0"/>
+                <Label x:Name="LblClientStatus" Content="Getrennt" Foreground="Red" FontWeight="Bold"/>
+            </StackPanel>
+
+            <!-- Nachricht senden -->
+            <Grid DockPanel.Dock="Bottom" Margin="0,8,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TxtClientMessage" Grid.Column="0"
+                         FontSize="13" Padding="6,4"
+                         KeyDown="TxtClientMessage_KeyDown"
+                         IsEnabled="False"/>
+                <Button x:Name="BtnClientSend" Grid.Column="1"
+                        Content="📤 Senden" FontWeight="Bold"
+                        Click="BtnClientSend_Click" IsEnabled="False"/>
+            </Grid>
+
+            <!-- Empfangene Nachrichten -->
+            <GroupBox Header="📨 Nachrichten">
+                <ListBox x:Name="LstClientMessages"
+                         FontFamily="Consolas" FontSize="12"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</Window>
