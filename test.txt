@@ -1,0 +1,5 @@
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Unblock-File .\create-db-app.ps1
+
+./create-map-app.sh MeineKarte.jpg 9.362 17.231 46.308 49.063 MeineTolleMapApp
