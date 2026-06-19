@@ -27,16 +27,22 @@ if (-not (Test-Path $DbFile)) {
     exit 1
 }
 
-# sqlite3 suchen
+# sqlite3 suchen oder .NET Fallback verwenden
 $sqlite3 = $null
+$useDotnet = $false
+
 if (Get-Command "sqlite3" -ErrorAction SilentlyContinue) {
     $sqlite3 = "sqlite3"
 } elseif (Get-Command "sqlite3.exe" -ErrorAction SilentlyContinue) {
     $sqlite3 = "sqlite3.exe"
 } else {
-    Write-Host "Fehler: sqlite3 ist nicht installiert!" -ForegroundColor Red
-    Write-Host "Installiere es von: https://www.sqlite.org/download.html"
-    exit 1
+    # Kein sqlite3 installiert. Wir nutzen dotnet, was für WPF ohnehin installiert ist!
+    if (Get-Command "dotnet" -ErrorAction SilentlyContinue) {
+        $useDotnet = $true
+    } else {
+        Write-Host "Fehler: Weder 'sqlite3' noch 'dotnet' gefunden! Bitte .NET SDK installieren." -ForegroundColor Red
+        exit 1
+    }
 }
 
 # Projektname bestimmen
@@ -54,7 +60,60 @@ Write-Host "  Projektname:   $ProjectName" -ForegroundColor Yellow
 Write-Host ""
 
 # ── Tabellen auslesen ─────────────────────────────────────────────
-$allTables = & $sqlite3 $DbFullPath ".tables" | ForEach-Object { $_ -split '\s+' } | Where-Object { $_ -ne '' -and $_ -ne 'sqlite_sequence' } | Sort-Object
+$allTables = @()
+$schemaLines = @()
+
+if ($useDotnet) {
+    Write-Host "Info: Lese Schema via lokales .NET (sqlite3 nicht installiert)..." -ForegroundColor Cyan
+    $origPath = Get-Location
+    $tempDir = Join-Path $env:TEMP "DbReader_$(Get-Random)"
+    New-Item -ItemType Directory -Path $tempDir | Out-Null
+    Set-Location $tempDir
+    & dotnet new console -n DbReader -f net8.0 > $null
+    & dotnet add package Microsoft.Data.Sqlite > $null
+
+    $csCode = @"
+using System;
+using Microsoft.Data.Sqlite;
+
+class Program {
+    static void Main(string[] args) {
+        using var conn = new SqliteConnection($"Data Source={args[0]}");
+        conn.Open();
+        
+        var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'";
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) {
+            var table = reader.GetString(0);
+            Console.WriteLine($"TABLE|{table}");
+            
+            var cmd2 = conn.CreateCommand();
+            cmd2.CommandText = $"PRAGMA table_info('{table}')";
+            using var r2 = cmd2.ExecuteReader();
+            while (r2.Read()) {
+                Console.WriteLine($"COL|{table}|{r2[0]}|{r2[1]}|{r2[2]}|{r2[3]}|{(r2.IsDBNull(4) ? "" : r2[4])}|{r2[5]}");
+            }
+            
+            var cmd3 = conn.CreateCommand();
+            cmd3.CommandText = $"PRAGMA foreign_key_list('{table}')";
+            using var r3 = cmd3.ExecuteReader();
+            while (r3.Read()) {
+                Console.WriteLine($"FK|{table}|{r3[2]}|{r3[3]}|{r3[4]}");
+            }
+        }
+    }
+}
+"@
+    Set-Content -Path "Program.cs" -Value $csCode
+    $schemaLines = & dotnet run -- "$DbFullPath"
+    Set-Location $origPath
+    Remove-Item -Path $tempDir -Recurse -Force
+
+    $allTables = $schemaLines | Where-Object { $_ -like "TABLE|*" } | ForEach-Object { ($_ -split '\|')[1] } | Sort-Object
+} else {
+    $allTables = & $sqlite3 $DbFullPath ".tables" | ForEach-Object { $_ -split '\s+' } | Where-Object { $_ -ne '' -and $_ -ne 'sqlite_sequence' } | Sort-Object
+}
 
 if ($allTables.Count -eq 0) {
     Write-Host "Fehler: Keine Tabellen in der Datenbank gefunden!" -ForegroundColor Red
@@ -103,34 +162,63 @@ $tableInfos = @()
 foreach ($table in $allTables) {
     Write-Host "  $table" -ForegroundColor Cyan
 
-    # Spalten holen: cid|name|type|notnull|dflt_value|pk
     $columns = @()
-    $colLines = & $sqlite3 $DbFullPath "PRAGMA table_info($table);"
-    foreach ($line in $colLines) {
-        if (-not $line) { continue }
-        $parts = $line -split '\|'
-        $columns += @{
-            Cid = $parts[0]
-            Name = $parts[1]
-            Type = $parts[2]
-            NotNull = $parts[3]
-            Default = $parts[4]
-            IsPK = ($parts[5] -eq "1")
-        }
-        $ctype = ConvertTo-CSharpType $parts[2]
-        Write-Host "    $($parts[1]) ($($parts[2])) -> $ctype"
-    }
-
-    # Foreign Keys holen
     $fks = @()
-    $fkLines = & $sqlite3 $DbFullPath "PRAGMA foreign_key_list($table);"
-    foreach ($line in $fkLines) {
-        if (-not $line) { continue }
-        $parts = $line -split '\|'
-        $fks += @{
-            Table = $parts[2]
-            From = $parts[3]
-            To = $parts[4]
+
+    if ($useDotnet) {
+        # Filtere die vorab geladenen Schema-Infos
+        $colLines = $schemaLines | Where-Object { $_ -like "COL|$table|*" }
+        foreach ($line in $colLines) {
+            $parts = $line -split '\|'
+            $columns += @{
+                Cid = $parts[2]
+                Name = $parts[3]
+                Type = $parts[4]
+                NotNull = $parts[5]
+                Default = $parts[6]
+                IsPK = ($parts[7] -eq "1")
+            }
+            $ctype = ConvertTo-CSharpType $parts[4]
+            Write-Host "    $($parts[3]) ($($parts[4])) -> $ctype"
+        }
+
+        $fkLines = $schemaLines | Where-Object { $_ -like "FK|$table|*" }
+        foreach ($line in $fkLines) {
+            $parts = $line -split '\|'
+            $fks += @{
+                Table = $parts[2]
+                From = $parts[3]
+                To = $parts[4]
+            }
+        }
+    } else {
+        # Spalten holen mit sqlite3: cid|name|type|notnull|dflt_value|pk
+        $colLines = & $sqlite3 $DbFullPath "PRAGMA table_info($table);"
+        foreach ($line in $colLines) {
+            if (-not $line) { continue }
+            $parts = $line -split '\|'
+            $columns += @{
+                Cid = $parts[0]
+                Name = $parts[1]
+                Type = $parts[2]
+                NotNull = $parts[3]
+                Default = $parts[4]
+                IsPK = ($parts[5] -eq "1")
+            }
+            $ctype = ConvertTo-CSharpType $parts[2]
+            Write-Host "    $($parts[1]) ($($parts[2])) -> $ctype"
+        }
+
+        # Foreign Keys holen mit sqlite3
+        $fkLines = & $sqlite3 $DbFullPath "PRAGMA foreign_key_list($table);"
+        foreach ($line in $fkLines) {
+            if (-not $line) { continue }
+            $parts = $line -split '\|'
+            $fks += @{
+                Table = $parts[2]
+                From = $parts[3]
+                To = $parts[4]
+            }
         }
     }
 

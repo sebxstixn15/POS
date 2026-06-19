@@ -53,9 +53,52 @@ if [ ! -f "$DB_FILE" ]; then
 fi
 
 if ! command -v sqlite3 &> /dev/null; then
-    echo -e "${RED}Fehler: sqlite3 ist nicht installiert!${NC}"
-    echo "Installiere es mit: brew install sqlite3"
-    exit 1
+    echo -e "${YELLOW}Info: sqlite3 ist nicht installiert! Erstelle temporären .NET Reader...${NC}"
+    if ! command -v dotnet &> /dev/null; then
+        echo -e "${RED}Fehler: Weder 'sqlite3' noch 'dotnet' gefunden! Bitte installieren.${NC}"
+        exit 1
+    fi
+
+    TEMP_SQLITE_DIR=$(mktemp -d)
+    pushd "$TEMP_SQLITE_DIR" > /dev/null
+    dotnet new console -n SqliteMock > /dev/null
+    dotnet add package Microsoft.Data.Sqlite > /dev/null
+    cat > Program.cs << 'EOF'
+using System;
+using Microsoft.Data.Sqlite;
+class Program {
+    static void Main(string[] args) {
+        using var conn = new SqliteConnection($"Data Source={args[0]}");
+        conn.Open();
+        if (args[1] == ".tables") {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'";
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read()) Console.Write(reader.GetString(0) + " ");
+            Console.WriteLine();
+        } else {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = args[1];
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read()) {
+                var cols = new string[reader.FieldCount];
+                for(int i=0; i<reader.FieldCount; i++) cols[i] = reader.IsDBNull(i) ? "" : reader.GetValue(i).ToString();
+                Console.WriteLine(string.Join("|", cols));
+            }
+        }
+    }
+}
+EOF
+    dotnet build > /dev/null
+    popd > /dev/null
+
+    # Wrapper Funktion, die sqlite3 imitiert
+    sqlite3() {
+        dotnet run --project "$TEMP_SQLITE_DIR/SqliteMock.csproj" --no-build -- "$1" "$2"
+    }
+
+    # Aufräumen bei Beenden
+    trap 'rm -rf "$TEMP_SQLITE_DIR"' EXIT
 fi
 
 # ── Projektname bestimmen ─────────────────────────────────────────
