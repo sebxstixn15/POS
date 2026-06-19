@@ -61,7 +61,7 @@ if ! command -v sqlite3 &> /dev/null; then
 
     TEMP_SQLITE_DIR=$(mktemp -d)
     pushd "$TEMP_SQLITE_DIR" > /dev/null
-    dotnet new console -n SqliteMock > /dev/null
+    dotnet new console -f net8.0 > /dev/null
     dotnet add package Microsoft.Data.Sqlite > /dev/null
     cat > Program.cs << 'EOF'
 using System;
@@ -94,7 +94,7 @@ EOF
 
     # Wrapper Funktion, die sqlite3 imitiert
     sqlite3() {
-        dotnet run --project "$TEMP_SQLITE_DIR/SqliteMock.csproj" --no-build -- "$1" "$2"
+        dotnet run --project "$TEMP_SQLITE_DIR" --no-build -- "$1" "$2"
     }
 
     # Aufräumen bei Beenden

@@ -69,7 +69,7 @@ if ($useDotnet) {
     $tempDir = Join-Path $env:TEMP "DbReader_$(Get-Random)"
     New-Item -ItemType Directory -Path $tempDir | Out-Null
     Set-Location $tempDir
-    & dotnet new console -n DbReader -f net8.0 > $null
+    & dotnet new console -f net8.0 > $null
     & dotnet add package Microsoft.Data.Sqlite > $null
 
     $csCode = @"
