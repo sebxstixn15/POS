@@ -50,32 +50,8 @@ $csproj = @"
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-</Project>
-"@
-Set-Content -Path "$BaseDir\$ProjectName.csproj" -Value $csproj -Encoding UTF8
-
-$csproj += @"
   <ItemGroup>
-    <None Update="$ImageName">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-</Project>
-"@
-# Den originalen csproj string modifizieren war falsch, ich mach es sauber:
-$csproj = @"
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Update="$ImageName">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Resource Include="$ImageName" />
   </ItemGroup>
 </Project>
 "@

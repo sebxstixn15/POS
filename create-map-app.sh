@@ -53,9 +53,7 @@ cat > "$BASE_DIR/$PROJECT_NAME.csproj" << EOF
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="$IMAGE_NAME">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Resource Include="$IMAGE_NAME" />
   </ItemGroup>
 </Project>
 EOF
