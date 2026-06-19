@@ -375,8 +375,13 @@ foreach ($ti in $tableInfos) {
     # Create-Parameter (nicht-PK Spalten)
     $nonPkCols = $ti.Columns | Where-Object { -not $_.IsPK }
     $createParams = ($nonPkCols | ForEach-Object {
-        $ct = ConvertTo-CSharpType $_.Type
-        "$ct $($_.Name)"
+        $col = $_
+        $ct = ConvertTo-CSharpType $col.Type
+        $fk = $ti.ForeignKeys | Where-Object { $_.From -eq $col.Name }
+        if ($fk) {
+            if ($ct -eq "int" -or $ct -eq "double") { $ct = "int?" }
+        }
+        "$ct $($col.Name)"
     }) -join ", "
     $createAssigns = ($nonPkCols | ForEach-Object {
         $prop = ConvertTo-PascalCase $_.Name
@@ -558,7 +563,7 @@ $serviceFields = ($tableInfos | ForEach-Object {
 $initServices = ($tableInfos | ForEach-Object {
     $cl = $_.ClassName
     $lower = $cl.ToLower()
-    "            _${lower}Service = new ${cl}Service(db);"
+    "            _${lower}Service = new ${cl}Service(_db);"
 }) -join "`n"
 
 $loadCalls = ($tableInfos | ForEach-Object { "            Load$($_.ClassName)();" }) -join "`n"

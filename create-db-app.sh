@@ -360,6 +360,14 @@ for i in "${!TABLE_NAMES[@]}"; do
         CSHARP_TYPE=$(sqlite_to_csharp_type "$COL_TYPE")
         PROP_NAME=$(capitalize "$COL_NAME")
 
+        # FK prüfen für Typ-Anpassung
+        FK_TABLE=$(echo "$FK_INFO" | awk -F'|' -v col="$COL_NAME" '$4 == col {print $3}')
+        if [ -n "$FK_TABLE" ]; then
+            if [ "$CSHARP_TYPE" = "int" ] || [ "$CSHARP_TYPE" = "double" ]; then
+                CSHARP_TYPE="int?"
+            fi
+        fi
+
         # Komma hinzufügen wenn nicht der erste Parameter
         if [ -n "$CREATE_PARAMS" ]; then
             CREATE_PARAMS="$CREATE_PARAMS, "
@@ -638,7 +646,7 @@ done
 INIT_SERVICES=""
 for CLASS in "${CLASS_NAMES[@]}"; do
     CLASS_LOWER=$(to_lower "$CLASS")
-    INIT_SERVICES="${INIT_SERVICES}            _${CLASS_LOWER}Service = new ${CLASS}Service(db);\n"
+    INIT_SERVICES="${INIT_SERVICES}            _${CLASS_LOWER}Service = new ${CLASS}Service(_db);\n"
 done
 
 # Using-Statements für Services
