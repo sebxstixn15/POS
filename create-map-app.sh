@@ -10,16 +10,35 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-PROJECT_NAME="${1:-MapMarkerApp}"
+if [ $# -lt 5 ]; then
+    echo -e "${RED}Fehler: Zu wenige Argumente!${NC}"
+    echo "Verwendung: $0 <Bild.jpg|png> <LonLeft> <LonRight> <LatBottom> <LatTop> [ProjektName]"
+    exit 1
+fi
+
+MAP_IMAGE="$1"
+LON_LEFT="$2"
+LON_RIGHT="$3"
+LAT_BOTTOM="$4"
+LAT_TOP="$5"
+PROJECT_NAME="${6:-MapMarkerApp}"
 BASE_DIR="$PROJECT_NAME"
+
+if [ ! -f "$MAP_IMAGE" ]; then
+    echo -e "${RED}Fehler: Bilddatei '$MAP_IMAGE' nicht gefunden!${NC}"
+    exit 1
+fi
+
+IMAGE_NAME=$(basename "$MAP_IMAGE")
 
 if [ -d "$BASE_DIR" ]; then
     echo -e "${RED}Fehler: Ordner '$BASE_DIR' existiert bereits!${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}[1/3] Erstelle Verzeichnisstruktur...${NC}"
+echo -e "${GREEN}[1/3] Erstelle Verzeichnisstruktur und kopiere Bild...${NC}"
 mkdir -p "$BASE_DIR"
+cp "$MAP_IMAGE" "$BASE_DIR/$IMAGE_NAME"
 
 echo -e "${GREEN}[2/3] Generiere WPF Projekt ($PROJECT_NAME)...${NC}"
 
@@ -33,6 +52,11 @@ cat > "$BASE_DIR/$PROJECT_NAME.csproj" << EOF
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Update="$IMAGE_NAME">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
 EOF
 
@@ -77,8 +101,9 @@ cat > "$BASE_DIR/MainWindow.xaml" << EOF
         <Border Grid.Row="1" Background="#E0E0E0" Margin="10">
             <!-- MapCanvas -->
             <Canvas x:Name="MapCanvas" ClipToBounds="True" SizeChanged="MapCanvas_SizeChanged">
-                <TextBlock Text="Füge ein Bild über den Canvas Hintergrund ein (ImageBrush)." 
-                           Foreground="#888" Canvas.Left="10" Canvas.Top="10" IsHitTestVisible="False"/>
+                <Canvas.Background>
+                    <ImageBrush ImageSource="$IMAGE_NAME" Stretch="Fill"/>
+                </Canvas.Background>
             </Canvas>
         </Border>
     </Grid>
@@ -98,11 +123,11 @@ namespace $PROJECT_NAME
 {
     public partial class MainWindow : Window
     {
-        // Koordinaten-Grenzen (wie in Waldwunderverwaltung für Österreich)
-        private const double LatTop    = 49.063175;
-        private const double LatBottom = 46.308597;
-        private const double LonLeft   =  9.362383;
-        private const double LonRight  = 17.231941;
+        // Dynamisch generierte Koordinaten-Grenzen basierend auf Parametern
+        private const double LatTop    = $LAT_TOP;
+        private const double LatBottom = $LAT_BOTTOM;
+        private const double LonLeft   = $LON_LEFT;
+        private const double LonRight  = $LON_RIGHT;
         private const double MarkerSize = 14;
 
         public MainWindow()

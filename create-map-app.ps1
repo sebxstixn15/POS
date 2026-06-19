@@ -1,6 +1,18 @@
 param (
-    [string]$ProjectName = "MapMarkerApp"
+    [Parameter(Mandatory=$true, Position=0)][string]$MapImage,
+    [Parameter(Mandatory=$true, Position=1)][double]$LonLeft,
+    [Parameter(Mandatory=$true, Position=2)][double]$LonRight,
+    [Parameter(Mandatory=$true, Position=3)][double]$LatBottom,
+    [Parameter(Mandatory=$true, Position=4)][double]$LatTop,
+    [Parameter(Position=5)][string]$ProjectName = "MapMarkerApp"
 )
+
+if (-not (Test-Path $MapImage)) {
+    Write-Host "Fehler: Bilddatei '$MapImage' nicht gefunden!" -ForegroundColor Red
+    exit 1
+}
+
+$ImageName = [System.IO.Path]::GetFileName($MapImage)
 
 # ═══════════════════════════════════════════════════════════════════
 #  create-map-app.ps1
@@ -22,8 +34,9 @@ if (Test-Path $BaseDir) {
     exit 1
 }
 
-Write-Host "[1/3] Erstelle Verzeichnisstruktur..." -ForegroundColor Green
+Write-Host "[1/3] Erstelle Verzeichnisstruktur und kopiere Bild..." -ForegroundColor Green
 New-Item -ItemType Directory -Path "$BaseDir" | Out-Null
+Copy-Item $MapImage "$BaseDir\$ImageName"
 
 Write-Host "[2/3] Generiere Projektdateien..." -ForegroundColor Green
 
@@ -37,6 +50,33 @@ $csproj = @"
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+</Project>
+"@
+Set-Content -Path "$BaseDir\$ProjectName.csproj" -Value $csproj -Encoding UTF8
+
+$csproj += @"
+  <ItemGroup>
+    <None Update="$ImageName">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
+"@
+# Den originalen csproj string modifizieren war falsch, ich mach es sauber:
+$csproj = @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="$ImageName">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
 "@
 Set-Content -Path "$BaseDir\$ProjectName.csproj" -Value $csproj -Encoding UTF8
@@ -82,10 +122,11 @@ $mainWindowXaml = @"
         </StackPanel>
 
         <Border Grid.Row="1" Background="#E0E0E0" Margin="10">
-            <!-- MapCanvas -->
+            <!-- MapCanvas mit Bild als Hintergrund -->
             <Canvas x:Name="MapCanvas" ClipToBounds="True" SizeChanged="MapCanvas_SizeChanged">
-                <TextBlock Text="Füge ein Bild über den Canvas Hintergrund ein (ImageBrush)." 
-                           Foreground="#888" Canvas.Left="10" Canvas.Top="10" IsHitTestVisible="False"/>
+                <Canvas.Background>
+                    <ImageBrush ImageSource="$ImageName" Stretch="Fill"/>
+                </Canvas.Background>
             </Canvas>
         </Border>
     </Grid>
@@ -106,11 +147,11 @@ namespace $ProjectName
 {
     public partial class MainWindow : Window
     {
-        // Koordinaten-Grenzen (wie in Waldwunderverwaltung für Österreich)
-        private const double LatTop    = 49.063175;
-        private const double LatBottom = 46.308597;
-        private const double LonLeft   =  9.362383;
-        private const double LonRight  = 17.231941;
+        // Dynamisch generierte Koordinaten-Grenzen basierend auf Parametern
+        private const double LatTop    = $($LatTop.ToString([System.Globalization.CultureInfo]::InvariantCulture));
+        private const double LatBottom = $($LatBottom.ToString([System.Globalization.CultureInfo]::InvariantCulture));
+        private const double LonLeft   = $($LonLeft.ToString([System.Globalization.CultureInfo]::InvariantCulture));
+        private const double LonRight  = $($LonRight.ToString([System.Globalization.CultureInfo]::InvariantCulture));
         private const double MarkerSize = 14;
 
         public MainWindow()
