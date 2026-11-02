@@ -1,4 +1,4 @@
-# TinyXML2 Explorer – einfache Version
+# TinyXML2 Explorer – statische Variante
 
 Diese Qt-6-Widgets-Anwendung erfüllt nur die Grundaufgabe:
 
@@ -7,8 +7,9 @@ Diese Qt-6-Widgets-Anwendung erfüllt nur die Grundaufgabe:
 3. Die XML-Tags erscheinen in einem `QTreeWidget`.
 4. Beim Anklicken eines Tags werden rechts seine Attribute und sein Textinhalt angezeigt.
 
-TinyXML2 wird als dynamische Bibliothek (`SHARED`) gebaut. Die Erweiterungen zum
-Bearbeiten und Speichern von Attributen sind bewusst nicht enthalten.
+TinyXML2 wird in dieser Variante als statische Bibliothek (`STATIC`) gebaut und
+direkt in die Anwendung gelinkt. Die Erweiterungen zum Bearbeiten und Speichern
+von Attributen sind bewusst nicht enthalten.
 
 ## In Qt Creator
 
@@ -17,15 +18,15 @@ Bearbeiten und Speichern von Attributen sind bewusst nicht enthalten.
 3. Ziel `TinyXml2Explorer` bauen und starten.
 4. Mit **XML-Datei öffnen …** z. B. `beispiel.xml` auswählen.
 
-Die dynamische Bibliothek entsteht beim Bauen als `libtinyxml2.11.dylib` (macOS),
-`tinyxml2.dll` (Windows) bzw. `libtinyxml2.so.11` (Linux).
+Die statische Bibliothek entsteht beim Bauen als `libtinyxml2.a` (macOS/Linux)
+bzw. `tinyxml2.lib` (Windows). Zur Laufzeit wird keine separate TinyXML2-Datei benötigt.
 
 ## Erklärung aller Dateien
 
 ### `CMakeLists.txt`
 
 Das ist die Projektbeschreibung für CMake und Qt Creator. Sie legt C++17 fest,
-sucht Qt 6 Widgets, baut `tinyxml2.cpp` als dynamische Bibliothek und verbindet
+sucht Qt 6 Widgets, baut `tinyxml2.cpp` als statische Bibliothek und verbindet
 diese Bibliothek anschließend mit der Anwendung `TinyXml2Explorer`.
 
 ### `src/main.cpp`

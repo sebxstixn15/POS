@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bibliothek ort="Wien">
+  <buch isbn="978-3-86680-192-9" sprache="de">
+    <titel>Qt und C++</titel>
+    <autor land="AT">Max Mustermann</autor>
+  </buch>
+  <buch isbn="978-1-4919-1108-7" sprache="en">
+    <titel>XML in Practice</titel>
+    <autor land="US">Jane Doe</autor>
+  </buch>
+</bibliothek>
