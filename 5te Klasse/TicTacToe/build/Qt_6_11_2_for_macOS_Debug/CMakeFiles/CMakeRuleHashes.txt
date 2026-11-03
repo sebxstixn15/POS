@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+cc85ce22c92dddc5463d3a40c271e2ab CMakeFiles/TicTacToe_autogen
+c1c531ec24d277315b0c0c3bc97f6243 TicTacToe_autogen/EWIEGA46WW/qrc_Ressources.cpp
+8d1264d4126d8e1c1f1f134c975f99b2 TicTacToe_autogen/timestamp

@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "libMath_S",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "libMath_S::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libMath_S-Debug-beccf8f9eb9e81162b3c.json",
+					"name" : "libMath_S",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libMath_S_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libMath_S_autogen-Debug-3e7cc7a99f2dabe30d6e.json",
+					"name" : "libMath_S_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libMath_S_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libMath_S_autogen_timestamp_deps-Debug-157acc1f6847b10b68b6.json",
+					"name" : "libMath_S_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/sebastianlampl/libMath_S/build/Qt_6_11_2_for_macOS_Debug",
+		"source" : "/Users/sebastianlampl/libMath_S"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

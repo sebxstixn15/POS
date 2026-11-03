@@ -1,0 +1,26 @@
+{
+	"BUILD_DIR" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug/TicTacToe_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/sebastianlampl/TicTacToe",
+	"CMAKE_SOURCE_DIR" : "/Users/sebastianlampl/TicTacToe",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Unix Makefiles",
+	"INCLUDE_DIR" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug/TicTacToe_autogen/include",
+	"INPUTS" : 
+	[
+		"/Users/sebastianlampl/TicTacToe/sketch.png",
+		"/Users/sebastianlampl/TicTacToe/star.png"
+	],
+	"LOCK_FILE" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/TicTacToe_autogen.dir/AutoRcc_Ressources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "Ressources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_Ressources.cpp",
+	"RCC_EXECUTABLE" : "/Users/sebastianlampl/Qt/6.11.2/macos/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/TicTacToe_autogen.dir/AutoRcc_Ressources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/Users/sebastianlampl/TicTacToe/Ressources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

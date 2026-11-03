@@ -1,0 +1,139 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-fc0f346ee951d725aa70.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"build" : "Math_D_build",
+					"jsonFile" : "directory-Math_D_build-Debug-7c52b64f44538f8ec0a4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "/Users/sebastianlampl/Math_D",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Taschenrechner",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "Math_D",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D-Debug-deb4acbc62f41d78cf4d.json",
+					"name" : "Math_D",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D_autogen::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D_autogen-Debug-2854e5e8b0328f07bb6c.json",
+					"name" : "Math_D_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D_autogen_timestamp_deps::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D_autogen_timestamp_deps-Debug-1f8bf963872a47afc4a6.json",
+					"name" : "Math_D_autogen_timestamp_deps",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Taschenrechner::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Taschenrechner-Debug-f745dbc7af58ed2be7e5.json",
+					"name" : "Taschenrechner",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Taschenrechner_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Taschenrechner_autogen-Debug-92f0c1f23ccde84acc4b.json",
+					"name" : "Taschenrechner_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Taschenrechner_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Taschenrechner_autogen_timestamp_deps-Debug-98ea93f9f8838590457b.json",
+					"name" : "Taschenrechner_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/sebastianlampl/Taschenrechner/build/Qt_6_11_2_for_macOS_Debug",
+		"source" : "/Users/sebastianlampl/Taschenrechner"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

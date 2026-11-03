@@ -1,0 +1,4 @@
+set(__QT_DEPLOY_TARGET_Math_D_FILE /Users/sebastianlampl/Taschenrechner/build/Qt_6_11_2_for_macOS_Debug/Math_D_build/libMath_D.dylib)
+set(__QT_DEPLOY_TARGET_Math_D_TYPE SHARED_LIBRARY)
+set(__QT_DEPLOY_TARGET_Taschenrechner_FILE /Users/sebastianlampl/Taschenrechner/build/Qt_6_11_2_for_macOS_Debug/Taschenrechner.app/Contents/MacOS/Taschenrechner)
+set(__QT_DEPLOY_TARGET_Taschenrechner_TYPE EXECUTABLE)

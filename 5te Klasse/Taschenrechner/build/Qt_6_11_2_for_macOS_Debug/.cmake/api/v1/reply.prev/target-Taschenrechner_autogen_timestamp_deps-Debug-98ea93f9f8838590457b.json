@@ -1,0 +1,34 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "Math_D::@9531616f62d40cfd66aa"
+		}
+	],
+	"id" : "Taschenrechner_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+	"isGeneratorProvided" : true,
+	"name" : "Taschenrechner_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

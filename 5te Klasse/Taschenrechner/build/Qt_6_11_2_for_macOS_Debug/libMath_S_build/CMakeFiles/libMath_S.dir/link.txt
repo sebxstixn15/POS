@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibMath_S.a CMakeFiles/libMath_S.dir/libMath_S_autogen/mocs_compilation.cpp.o CMakeFiles/libMath_S.dir/libmath_s.cpp.o
+/usr/bin/ranlib liblibMath_S.a

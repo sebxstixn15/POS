@@ -1,0 +1,25 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "" "libMath_S_build/libMath_S_autogen/timestamp" "custom" "libMath_S_build/libMath_S_autogen/deps"
+  "/Users/sebastianlampl/Taschenrechner/build/Qt_6_11_2_for_macOS_Debug/libMath_S_build/libMath_S_autogen/mocs_compilation.cpp" "libMath_S_build/CMakeFiles/libMath_S.dir/libMath_S_autogen/mocs_compilation.cpp.o" "gcc" "libMath_S_build/CMakeFiles/libMath_S.dir/libMath_S_autogen/mocs_compilation.cpp.o.d"
+  "/Users/sebastianlampl/libMath_S/libmath_s.cpp" "libMath_S_build/CMakeFiles/libMath_S.dir/libmath_s.cpp.o" "gcc" "libMath_S_build/CMakeFiles/libMath_S.dir/libmath_s.cpp.o.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

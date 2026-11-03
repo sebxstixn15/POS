@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_TicTacToe_FILE /Users/sebastianlampl/TicTacToe/build/Qt_6_11_2_for_macOS_Debug/TicTacToe.app/Contents/MacOS/TicTacToe)
+set(__QT_DEPLOY_TARGET_TicTacToe_TYPE EXECUTABLE)

@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_libMath_S_FILE /Users/sebastianlampl/libMath_S/build/Qt_6_11_2_for_macOS_Debug/liblibMath_S.a)
+set(__QT_DEPLOY_TARGET_libMath_S_TYPE STATIC_LIBRARY)
