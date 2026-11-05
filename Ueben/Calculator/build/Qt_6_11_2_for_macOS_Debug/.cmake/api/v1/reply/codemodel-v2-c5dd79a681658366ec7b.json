@@ -1,0 +1,139 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-17dbe2dd8f3670555dd4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				},
+				{
+					"build" : "Math_D_build",
+					"jsonFile" : "directory-Math_D_build-Debug-9733f5607816c7949aa5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D",
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Calculator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "Math_D",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Calculator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Calculator-Debug-3064d6457572eee8d30d.json",
+					"name" : "Calculator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Calculator_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Calculator_autogen-Debug-9036b77e4cc112a08df7.json",
+					"name" : "Calculator_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Calculator_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Calculator_autogen_timestamp_deps-Debug-e61dc6b464aeb53f8f4c.json",
+					"name" : "Calculator_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D-Debug-7491524d7c95cccf2be4.json",
+					"name" : "Math_D",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D_autogen::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D_autogen-Debug-8a6ee21863ffdd029993.json",
+					"name" : "Math_D_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "Math_D_autogen_timestamp_deps::@9531616f62d40cfd66aa",
+					"jsonFile" : "target-Math_D_autogen_timestamp_deps-Debug-8b523c69326625384845.json",
+					"name" : "Math_D_autogen_timestamp_deps",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Calculator/build/Qt_6_11_2_for_macOS_Debug",
+		"source" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Calculator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

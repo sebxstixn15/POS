@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/ressource">
+        <file>stern.png</file>
+        <file>plus.png</file>
+    </qresource>
+</RCC>

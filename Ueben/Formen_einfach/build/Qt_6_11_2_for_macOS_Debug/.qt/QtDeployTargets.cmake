@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_Formen_einfach_FILE /Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/Formen_einfach)
+set(__QT_DEPLOY_TARGET_Formen_einfach_TYPE EXECUTABLE)

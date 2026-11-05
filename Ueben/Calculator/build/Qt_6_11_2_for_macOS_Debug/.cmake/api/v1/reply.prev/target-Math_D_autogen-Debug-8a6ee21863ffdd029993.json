@@ -1,0 +1,71 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "Math_D_autogen_timestamp_deps::@9531616f62d40cfd66aa"
+		}
+	],
+	"id" : "Math_D_autogen::@9531616f62d40cfd66aa",
+	"isGeneratorProvided" : true,
+	"name" : "Math_D_autogen",
+	"paths" : 
+	{
+		"build" : "Math_D_build",
+		"source" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Qt_6_11_2_for_macOS_Debug/Math_D_build/CMakeFiles/Math_D_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Qt_6_11_2_for_macOS_Debug/Math_D_build/CMakeFiles/Math_D_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Qt_6_11_2_for_macOS_Debug/Math_D_build/Math_D_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

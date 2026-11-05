@@ -1,0 +1,4 @@
+set(__QT_DEPLOY_TARGET_Math_D_FILE /Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Calculator/build/Qt_6_11_2_for_macOS_Debug/Math_D_build/libMath_D.dylib)
+set(__QT_DEPLOY_TARGET_Math_D_TYPE SHARED_LIBRARY)
+set(__QT_DEPLOY_TARGET_Calculator_FILE /Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Calculator/build/Qt_6_11_2_for_macOS_Debug/Calculator.app/Contents/MacOS/Calculator)
+set(__QT_DEPLOY_TARGET_Calculator_TYPE EXECUTABLE)

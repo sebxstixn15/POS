@@ -1,0 +1,27 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "Math_D_autogen_timestamp_deps::@9531616f62d40cfd66aa",
+	"isGeneratorProvided" : true,
+	"name" : "Math_D_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "Math_D_build",
+		"source" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

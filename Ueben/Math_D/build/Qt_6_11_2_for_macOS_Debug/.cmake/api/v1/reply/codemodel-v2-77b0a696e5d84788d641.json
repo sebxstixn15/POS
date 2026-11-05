@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Math_D",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Math_D::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Math_D-Debug-3302c513951c54839d01.json",
+					"name" : "Math_D",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Math_D_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Math_D_autogen-Debug-0d8091e0ae10c9c9168b.json",
+					"name" : "Math_D_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Math_D_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Math_D_autogen_timestamp_deps-Debug-acadfad22e9b0a6a84fb.json",
+					"name" : "Math_D_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D/build/Qt_6_11_2_for_macOS_Debug",
+		"source" : "/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Math_D"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

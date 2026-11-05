@@ -1,0 +1,5 @@
+/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/Formen_einfach.dir
+/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/edit_cache.dir
+/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/rebuild_cache.dir
+/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/Formen_einfach_autogen_timestamp_deps.dir
+/Users/sebastianlampl/Documents/Schule/POS/POS/Ueben/Formen_einfach/build/Qt_6_11_2_for_macOS_Debug/CMakeFiles/Formen_einfach_autogen.dir

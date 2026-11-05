@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>700</width><height>500</height></rect></property>
+  <property name="windowTitle"><string>XML Viewer</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item><widget class="QPushButton" name="openButton"><property name="text"><string>XML-Datei öffnen</string></property></widget></item>
+    <item><widget class="QTreeWidget" name="treeWidget"><column><property name="text"><string>XML-Elemente</string></property></column></widget></item>
+    <item><widget class="QLabel" name="attributeLabel"><property name="text"><string>Attribut des ausgewählten Elements:</string></property></widget></item>
+    <item><widget class="QComboBox" name="attributeBox"/></item>
+    <item><widget class="QLabel" name="valueLabel"><property name="text"><string>Wert:</string></property></widget></item>
+    <item><widget class="QLineEdit" name="valueEdit"/></item>
+    <item><widget class="QPushButton" name="changeButton"><property name="text"><string>Attribut übernehmen</string></property></widget></item>
+    <item><widget class="QPushButton" name="saveButton"><property name="text"><string>XML-Datei speichern</string></property></widget></item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

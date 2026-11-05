@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.16)
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    project(Formen LANGUAGES CXX)
+    set(CMAKE_CXX_STANDARD 17)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+    set(CMAKE_AUTOUIC ON)
+    find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+endif()
+
+if(NOT TARGET Formen_Factory)
+    add_subdirectory(../Formen_Factory ${CMAKE_CURRENT_BINARY_DIR}/Formen_Factory)
+endif()
+if(NOT TARGET Formen_Plugin)
+    add_subdirectory(../Formen_Plugin ${CMAKE_CURRENT_BINARY_DIR}/Formen_Plugin)
+endif()
+
+add_executable(Formen main.cpp mainwindow.cpp mainwindow.h mainwindow.ui)
+target_link_libraries(Formen PRIVATE Formen_Factory)
+set_target_properties(Formen PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_dependencies(Formen Formen_Plugin)

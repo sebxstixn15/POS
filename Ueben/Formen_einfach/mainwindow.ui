@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Formen einfach zeichnen</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="eingabeLayout">
+      <item>
+       <widget class="QComboBox" name="auswahl">
+        <item><property name="text"><string>Kreis</string></property></item>
+        <item><property name="text"><string>Quadrat</string></property></item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="eingabe">
+        <property name="placeholderText"><string>x,y,Größe (z. B. 100,100,40)</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="zeichnenButton">
+        <property name="text"><string>Zeichnen</string></property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item><widget class="QLabel" name="hilfeText"><property name="text"><string>Eingabe:</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
