@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-ba7e90f26c94b6f88e87.json",
+					"jsonFile" : "directory-.-Debug-c1b9caab15849838fb07.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "XML_Viewer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-XML_Viewer-Debug-5e1f8a499a49e7c3531c.json",
+					"jsonFile" : "target-XML_Viewer-Debug-8c4672258aed6e6ce671.json",
 					"name" : "XML_Viewer",
 					"projectIndex" : 0
 				},

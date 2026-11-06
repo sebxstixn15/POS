@@ -22,6 +22,7 @@ public:
 
 private slots:
     void openXmlFile();
+    void openFolder();
 
 private:
     void addElement(tinyxml2::XMLElement *element, QTreeWidgetItem *parent);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>500</width><height>220</height></rect></property>
+  <property name="windowTitle"><string>UPN-Rechner</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item><widget class="QLabel" name="anleitung">
+     <property name="text"><string>Ausdruck eingeben (z. B. 3 4 5 * +). Zahlen und Operatoren mit Leerzeichen trennen.</string></property>
+     <property name="wordWrap"><bool>true</bool></property>
+    </widget></item>
+    <item><widget class="QLineEdit" name="eingabe">
+     <property name="placeholderText"><string>3 4 5 * +</string></property>
+    </widget></item>
+    <item><widget class="QPushButton" name="berechnenButton">
+     <property name="text"><string>Berechnen</string></property>
+    </widget></item>
+    <item><widget class="QLabel" name="ergebnis">
+     <property name="text"><string>Ergebnis: –</string></property>
+    </widget></item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

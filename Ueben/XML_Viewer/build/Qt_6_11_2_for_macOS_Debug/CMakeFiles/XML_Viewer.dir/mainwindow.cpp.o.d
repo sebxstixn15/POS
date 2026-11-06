@@ -1100,6 +1100,7 @@ CMakeFiles/XML_Viewer.dir/mainwindow.cpp.o: \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtCore.framework/Headers/qtimezone.h \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtCore.framework/Headers/qurl.h \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtWidgets.framework/Headers/qdialog.h \
+  /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtCore.framework/Headers/QDir \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtWidgets.framework/Headers/QMessageBox \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtWidgets.framework/Headers/qmessagebox.h \
   /Users/sebastianlampl/Qt/6.11.2/macos/lib/QtWidgets.framework/Headers/qdialogbuttonbox.h
